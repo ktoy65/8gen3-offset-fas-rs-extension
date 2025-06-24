@@ -1,7 +1,6 @@
-id=8gen3_fas_rs_extension
-name=fas-rs-extension-8gen3
+id=8gen3_offset_fas_rs_extension
+name=fas-rs-extension-8gen3-offset
 version=v1.0.0
 versionCode=4
 author=
-description=fas-rs cpu frequency offset for 8gen3
-updateJson=
+description=fas-rs cpu freq offset for 8gen3
