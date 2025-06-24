@@ -1,33 +1,39 @@
-API_VERSION = 3
-
-set_ignore_policy(0, true)
+API_VERSION = 4
 
 function load_fas(pid, pkg)
-    if (pkg == "com.miHoYo.Yuanshen" or pkg == "com.miHoYo.ys.mi" or pkg == "com.miHoyo.ys.bilibili" or pkg == "com.miHoYo.GenshinImpact")
-    then
-        set_policy_freq_offset(2, -80000)
-    elseif (pkg == "com.tencent.tmgp.sgame" or pkg == "com.levelinfinite.sgameGlobal")
-    then
-        set_policy_freq_offset(2, -100000)
-    elseif (pkg == "com.netease.x19" or pkg == "com.mojang.minecraftpe")
-    then
-        set_policy_freq_offset(2, -1000000)
-    elseif (pkg == "com.miHoYo.Nap" or pkg == "com.miHoYo.zenless")
-    then
-        set_ignore_policy(2, true)
-    elseif (pkg == "com.ChillyRoom.DungeonShooter")
-    then
-        set_policy_freq_offset(2, -50000)
-    elseif (pkg == "com.netease.nshm") then
-        set_policy_freq_offset(2, -300000)
-    elseif (pkg == "com.miHoYo.hkrpg") then
-        set_policy_freq_offset(2, -600000)
-    elseif (pkg == "com.tencent.lolm") then
-        set_policy_freq_offset(2, -600000)
+    if pkg == "com.miHoYo.Yuanshen" then
+          set_extra_policy_rel(2, 7, -200000, -100000)
+          set_extra_policy_rel(5, 7, -450000, -300000)
+          set_ignore_policy(0, true)
+    elseif pkg == "com.tencent.tmgp.sgame" then
+          set_extra_policy_rel(2, 7, -400000, -300000)
+          set_extra_policy_abs(5, 499200, 960000)
+          set_ignore_policy(0, true)
     end
 end
 
-function unload_fas()
-    set_ignore_policy(2, false)
-    set_policy_freq_offset(2, 0)
+function unload_fas(pid, pkg)
+set_ignore_policy(0, false)
+remove_extra_policy(0)
+remove_extra_policy(2)
+remove_extra_policy(5)
+remove_extra_policy(7)
 end
+
+
+--CPU频率信息
+
+--集群 policy0:
+--364800 460800 556800 672000 787200 902400 1017600 1132800 1248000 1344000 1459200 1574400 1689600 1804800 1920000 2035200 2150400 2265600
+
+--集群 policy2:
+--499200 614400 729600 844800 960000 1075200 1190400 1286400 1401600 1497600 1612800 1708800 1824000 1920000 2035200 2131200 2188800 2246400 2323200 2380800 2438400 2515200 2572800 2630400 2707200 2764800 2841600 2899200 2956800 3014400 3072000 3148800
+
+--集群 policy5:
+--499200 614400 729600 844800 960000 1075200 1190400 1286400 1401600 1497600 1612800 1708800 1824000 1920000 2035200 2131200 2188800 2246400 2323200 2380800 2438400 2515200 2572800 2630400 2707200 2764800 2841600 2899200 2956800
+
+--集群 policy7:
+--480000 576000 672000 787200 902400 1017600 1132800 1248000 1363200 1478400 1593600 1708800 1824000 1939200 2035200 2112000 2169600 2246400 2304000 2380800 2438400 2496000 2553600 2630400 2688000 2745600 2803200 2880000 2937600 2995200 3052800 3110400 3187200 3244800 3302400
+
+--GPU频率信息
+--845000000 700000000 610000000 515000000
